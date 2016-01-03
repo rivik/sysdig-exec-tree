@@ -73,7 +73,7 @@ function on_set_arg(name, val)
         proc_substr = val
         return true
     elseif name == "track_open_files" then
-        track_open_files = val 
+        track_open_files = ((type(val) == 'boolean' and val == true) or (type(val) == 'string' and val == 'true'))
         return true
     end
     return false
