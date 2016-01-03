@@ -148,10 +148,12 @@ function on_event()
             store_res_data(ptree_id, ptree_level[pid], evt_type, exe_name .. " " .. exe_args)
         end
     elseif track_open_files == true and evt_type == 'open' and evt.field(f_fd_name) ~= nil then
-        if files_uniq_level[evt.field(f_fd_name)] == ptree_level[pid] then
+        local fd_name = evt.field(f_fd_name)
+        if files_uniq_level[fd_name] ~= nil and files_uniq_level[fd_name][ptree_level[pid]] == true then
             return true
         else
-            files_uniq_level[evt.field(f_fd_name)] = ptree_level[pid]
+            if files_uniq_level[fd_name] == nil then files_uniq_level[fd_name] = {} end
+            files_uniq_level[fd_name][ptree_level[pid]] = true
 
             --print(ptree_id, evt_num, ptree_level[pid], evt_type, evt.field(f_fd_name))
             store_res_data(ptree_id, ptree_level[pid], evt_type, evt.field(f_fd_name))
