@@ -46,7 +46,7 @@ args =
 {
     {
         name = "proc_substr", 
-        description = "Filter for processes to track (childs will be tracked automatically)", 
+        description = "Filter for processes to track (children will be tracked automatically)", 
         argtype = "string",
         optional = true
     },
